@@ -4,7 +4,7 @@ API RESTful desarrollada con Spring Boot para la gestión de empleados, implemen
 
 ## 📋 Descripción
 
-Esta API proporciona un sistema completo de gestión de empleados con seguridad basada en tokens JWT. Permite realizar operaciones CRUD sobre empleados, con un sistema de autenticación robusto que garantiza el acceso seguro a los recursos.
+Esta API proporciona un sistema completo de gestión de empleados y departamentos con seguridad basada en tokens JWT. Permite realizar operaciones CRUD sobre empleados y departamentos, con un sistema de autenticación robusto que garantiza el acceso seguro a los recursos.
 
 ## 🚀 Tecnologías Utilizadas
 
@@ -23,6 +23,8 @@ Esta API proporciona un sistema completo de gestión de empleados con seguridad 
 - ✅ Registro de usuarios
 - ✅ Login seguro
 - ✅ CRUD completo de empleados
+- ✅ CRUD completo de departamentos
+- ✅ Relación entre empleados y departamentos
 - ✅ Validación de tokens
 - ✅ Protección de endpoints con roles
 - ✅ Gestión de excepciones personalizada
@@ -95,6 +97,17 @@ La API estará disponible en `http://localhost:8080`
 | PUT | `/api/empleados/{id}` | Actualizar empleado | Sí |
 | DELETE | `/api/empleados/{id}` | Eliminar empleado | Sí |
 
+### Departamentos
+
+| Método | Endpoint | Descripción | Autenticación |
+|--------|----------|-------------|---------------|
+| GET | `/api/departamentos` | Listar todos los departamentos | Sí |
+| GET | `/api/departamentos/{id}` | Obtener departamento por ID | Sí |
+| POST | `/api/departamentos` | Crear nuevo departamento | Sí |
+| PUT | `/api/departamentos/{id}` | Actualizar departamento | Sí |
+| DELETE | `/api/departamentos/{id}` | Eliminar departamento | Sí |
+| GET | `/api/departamentos/{id}/empleados` | Listar empleados de un departamento | Sí |
+
 ## 📝 Ejemplos de Uso
 
 ### Registro de Usuario
@@ -148,6 +161,33 @@ curl -X POST http://localhost:8080/api/empleados \
 
 ```bash
 curl -X GET http://localhost:8080/api/empleados \
+  -H "Authorization: Bearer {tu_token}"
+```
+
+### Crear Departamento
+
+```bash
+curl -X POST http://localhost:8080/api/departamentos \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {tu_token}" \
+  -d '{
+    "nombre": "Recursos Humanos",
+    "descripcion": "Gestión del personal y relaciones laborales",
+    "ubicacion": "Edificio A - Planta 2"
+  }'
+```
+
+### Listar Departamentos
+
+```bash
+curl -X GET http://localhost:8080/api/departamentos \
+  -H "Authorization: Bearer {tu_token}"
+```
+
+### Obtener Empleados de un Departamento
+
+```bash
+curl -X GET http://localhost:8080/api/departamentos/1/empleados \
   -H "Authorization: Bearer {tu_token}"
 ```
 
